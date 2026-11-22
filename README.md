@@ -20,6 +20,7 @@ Use a separate API key per environment.
 
 ```bash
 php artisan test
+php artisan pixelforge:reconcile --days=7   # compare our recorded costs with Pixelforge's /v1/usage
 ```
 
 ## How it works
