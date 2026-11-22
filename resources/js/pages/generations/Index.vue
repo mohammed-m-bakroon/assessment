@@ -133,7 +133,7 @@ function waitingText(g: Generation): string {
                             <template v-else-if="g.status === 'failed'">
                                 <XCircle class="size-6 text-red-500" />
                                 <span class="text-foreground">{{ g.error_message ?? 'The generation failed.' }}</span>
-                                <span class="text-xs">You were not charged.</span>
+                                <span v-if="!/not charged/i.test(g.error_message ?? '')" class="text-xs">You were not charged.</span>
                             </template>
                             <template v-else>
                                 <Loader2 class="size-6 animate-spin" />
