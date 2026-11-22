@@ -18,7 +18,8 @@ export interface NavItem {
 
 export interface SharedData {
     name: string;
-    quote: { message: string; author: string };
+    quote?: { message: string; author: string };
+    flash: { success: string | null };
     auth: Auth;
     ziggy: {
         location: string;

@@ -2,11 +2,9 @@
 
 use App\Http\Controllers\GenerationController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
+// Guests land on the login page (via the auth middleware), users on the generate page.
+Route::redirect('/', 'generate')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // The starter kit sends users here after login; the generate page is our home.
