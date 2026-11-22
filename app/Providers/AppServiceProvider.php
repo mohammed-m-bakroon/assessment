@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Billing\PricingCalculator;
+use App\Models\User;
 use App\Pixelforge\PixelforgeClient;
 use App\Pixelforge\WebhookSignature;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +30,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::preventLazyLoading(! $this->app->isProduction());
+
+        Gate::define('view-admin', fn (User $user) => $user->is_admin);
     }
 }

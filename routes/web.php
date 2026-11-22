@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\GenerationController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('generations.store');
     Route::get('generations', [GenerationController::class, 'index'])->name('generations.index');
     Route::get('generations/status', [GenerationController::class, 'status'])->name('generations.status');
+
+    Route::get('admin/report', ReportController::class)->middleware('can:view-admin')->name('admin.report');
 });
 
 require __DIR__.'/settings.php';
