@@ -88,6 +88,19 @@ The range is saved with the generation, so history shows the estimate next to th
   session/CSRF) and replies within Pixelforge's 10-second timeout.
 - **Expired image links** (after 24h) show a clear "link expired" state instead of a broken image.
 
+## Admin report (stretch goal)
+
+`/admin/report` shows, for operators, what users were charged, what Pixelforge charged us, and the profit,
+per UTC day (expandable per user) and per user, for any range of up to 92 days.
+
+- A generation counts on the **UTC day it completed**, which is how Pixelforge attributes cost in
+  `GET /v1/usage`. The page fetches `/v1/usage` for the same range and shows Pixelforge's figure
+  next to ours for each day, with a match or mismatch marker.
+- Aggregation happens in SQL on integer nano-dollars, so totals stay exact.
+- Generations are kept when a user deletes their account (`user_id` is set to null), because
+  Pixelforge still billed us for them.
+- Grant access with `php artisan app:make-admin you@example.com` (`--revoke` to remove it).
+
 ## Layout
 
 | Path | What |
